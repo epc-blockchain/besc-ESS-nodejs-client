@@ -27,7 +27,9 @@ class BESC_ESS_Host{
 
 const endpoints = {
     debug: "/debugs/:project_id",
-    project: "/project/:project_id"
+    project: "/project/:project_id",
+    baseline: "/project/:project_id/baseline",
+    formulas: "/project/:project_id/formulas"
 };
 
 const basePath = "/energysaving";
