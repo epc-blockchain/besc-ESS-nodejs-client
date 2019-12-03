@@ -29,6 +29,9 @@ var host_client = new besc_client.Host("http://localhost:3000");
 
     f2.applyFieldsValues({h: 20, w: 20, d: 20});
 
+    // you can create Project data  with current time with
+    // ProjectData.creatWithCurrentTime
+
     var projectData = new ProjectData(
         "2019-05-29T06:00:00", // UTC Timestamp
         "Testing", 
@@ -48,29 +51,14 @@ var host_client = new besc_client.Host("http://localhost:3000");
                 [f2] //formulas
             ), 
         ],
-        110, // TotalEnergyUsage
-        30, // TotalEnergySaved
         80.5, // AverageRT
         "101.1212, 112.1133" // Geolocation
     );
 
-    /*
-    var projectData = ProjectData.creatWithCurrentTime(
-        "Testing", 
-        [
-            new Device("AABC1",40), 
-            new Device("AABC2",70)
-        ],
-        110,
-        80.5,
-        "101.1212, 112.1133"
-    );
-    */
-
     try{
         var response = await besc_client.API.sendProjectData(host_client, keypair, projectData);
 
-        //console.log(response);
+        console.log(response);
     }
     catch(apiError){
         // apiError.statusCode - request http status code

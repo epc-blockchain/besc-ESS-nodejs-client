@@ -10,17 +10,15 @@ class ProjectData{
     * @param {string|number} datetime - DateTime in string
     * @param {string} project - Project Name
     * @param {[Device]} devices - Device object
-    * @param {number} totalEnergyUsage - TotalEnergyUsage
-    * @param {number} totalEnergySaved - totalEnergySaved
     * @param {number} averageRT - AverageRT
     * @param {string} geolocation - Geolocation
     */
-    constructor(dateTime, project_name, devices, totalEnergyUsage, totalEnergySaved, averageRT, geolocation) {
+    constructor(dateTime, project_name, devices, averageRT, geolocation) {
         this.project = project_name;
         this.datetime = dateTime;
         this.devices = devices;
-        this.totalEnergyUsage = totalEnergyUsage;
-        this.totalEnergySaved = totalEnergySaved;
+        this.totalEnergyUsage = this.devices.length ? this.devices.reduce((a, b) => a + (b.energyUsage || 0), 0) : 0;
+        this.totalEnergySaved = this.devices.length ? this.devices.reduce((a, b) => a + (b.energySaved || 0), 0) : 0;
         this.averageRT = averageRT;
         this.geolocation = geolocation;
 
@@ -33,20 +31,18 @@ class ProjectData{
     * @param {string} project - Project Name
     * @param {string} datetime - DateTime in string
     * @param {[Device]} devices - Device object
-    * @param {number} totalEnergyUsage - TotalEnergyUsage
-    * @param {number} totalEnergySaved - totalEnergySaved
     * @param {number} averageRT - AverageRT
     * @param {string} geolocation - Geolocation
     * @returns {ProjectData}
     */
-    static createWithCurrentTime(project_name, devices, totalEnergyUsage, totalEnergySaved, averageRT, geolocation){
+    static createWithCurrentTime(project_name, devices, averageRT, geolocation){
 
         var dateNow = new Date();
 
         // current date time as UTC format
         var currentDateTime = dateNow.toJSON();
 
-        return new ProjectData(currentDateTime, project_name, devices, totalEnergyUsage, totalEnergySaved, averageRT, geolocation);
+        return new ProjectData(currentDateTime, project_name, devices, averageRT, geolocation);
     }
 
     validate(){
@@ -65,8 +61,8 @@ class ProjectData{
         }
 
         validate.number(this.averageRT, "AverageRT");
-        validate.number(this.totalEnergyUsage, "TotalEnergyUsage");
-        validate.number(this.totalEnergySaved, "totalEnergySaved");
+        //validate.number(this.totalEnergyUsage, "TotalEnergyUsage");
+        //validate.number(this.totalEnergySaved, "totalEnergySaved");
         validate.string(this.geolocation, "Geolocation");
         validate.string(this.project, "Project");
         validate.datetimeString(this.datetime, "DateTime");
@@ -89,8 +85,8 @@ class ProjectData{
             Project: this.project,
             DateTime: this.datetime,
             Devices: this.serializeDevices(),
-            TotalEnergyUsage: this.totalEnergyUsage,
-            TotalEnergySaved: this.totalEnergySaved,
+            TotalEnergyUsage: this.devices.length ? this.devices.reduce((a, b) => a + (b.energyUsage || 0), 0) : 0,
+            TotalEnergySaved: this.devices.length ? this.devices.reduce((a, b) => a + (b.energySaved || 0), 0) : 0,
             AverageRT: this.averageRT,
             Geolocation: this.geolocation
         };
@@ -157,7 +153,7 @@ class ProjectData{
             return new Device(deviceInfo.DeviceId, deviceInfo.EnergyUsage, deviceInfo.EnergySaved, deviceInfo.Efficiency, formulas);
         });
 
-        return new this(projectDataDTO.DateTime, projectDataDTO.Project, devices, projectDataDTO.TotalEnergyUsage, projectDataDTO.TotalEnergySaved, projectDataDTO.AverageRT, projectDataDTO.Geolocation);
+        return new this(projectDataDTO.DateTime, projectDataDTO.Project, devices, projectDataDTO.AverageRT, projectDataDTO.Geolocation);
     }
 }
 
