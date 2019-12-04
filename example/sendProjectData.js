@@ -63,7 +63,7 @@ var host_client = new besc_client.Host("http://localhost:3000");
     catch(apiError){
         // apiError.statusCode - request http status code
         // apiError.error - error message that send back from server
-        //console.log(apiError);
+        console.log(apiError.error);
     }
 
 })();

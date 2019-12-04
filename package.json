@@ -1,6 +1,6 @@
 {
   "name": "besc-ess-nodejs-client",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "BESC ESS nodejs client",
   "main": "src/index.js",
   "scripts": {
@@ -14,12 +14,12 @@
     "besc",
     "carbo"
   ],
-  "author": "Chun Lam",
-  "license": "MIT",
+  "author": "EPC-Blockhain",
+  "license": "LGPL",
   "bugs": {
     "url": "https://github.com/epc-blockchain/besc-ESS-nodejs-client/issues"
   },
-  "homepage": "https://github.com/epc-blockchain/bbesc-ESS-nodejs-client#readme",
+  "homepage": "https://github.com/epc-blockchain/besc-ESS-nodejs-client#readme",
   "dependencies": {
     "mathjs": "^6.2.5",
     "query-string": "^6.5.0",
