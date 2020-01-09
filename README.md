@@ -28,7 +28,7 @@ For those who are not using this client, need to add in few header for it. Data 
         "DeviceId": "AC22", 
         "EnergyUsage": 50,
         "EnergySaved": 5,
-        "Efficiency": 10,
+        "Efficiency": 12,
         "Formulas": []
     }
     ], 
@@ -60,16 +60,23 @@ var object = {
     Devices: [ 
     { 
 	DeviceId: "AC11", 
-	EnergyUsage: 130.0 
+    EnergyUsage: 50.0 ,
+    EnergySaved: 5,
+    Efficiency: 10,
+    Formulas: []
     },
     {
 	DeviceId: "AC22", 
-	EnergyUsage: 180.0 
+    EnergyUsage: 50.0 ,
+    EnergySaved: 5,
+    Efficiency: 12,
+    Formulas: []
     }
     ], 
-    TotalEnergyUsage: 310.0, 
-    AverageRT: 188.0, 
-    Geolocation: "Selangor"
+    TotalEnergyUsage: 100.0,
+    TotalEnergySaved: 10, 
+    AverageRT: 88.0, 
+    Geolocation: "101.1212, 112.1133"
 };
 
 var checksum = sha1( JSON.stringify(object) );
