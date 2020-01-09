@@ -18,17 +18,24 @@ For those who are not using this client, need to add in few header for it. Data 
     "DateTime" : "2019-05-23T06:00:00",
     "Devices": [ 
     { 
- 	"DeviceId": "AC11", 
-	"EnergyUsage": 130.0 
+        "DeviceId": "AC11", 
+        "EnergyUsage": 50,
+        "EnergySaved": 5,
+        "Efficiency": 10,
+        "Formulas": []
     },
     {
-	"DeviceId": "AC22", 
-	"EnergyUsage": 180.0 
+        "DeviceId": "AC22", 
+        "EnergyUsage": 50,
+        "EnergySaved": 5,
+        "Efficiency": 10,
+        "Formulas": []
     }
     ], 
-    "TotalEnergyUsage": 310.0, 
-    "AverageRT": 188.0, 
-    "Geolocation": "Selangor"
+    "TotalEnergyUsage": 100.0, 
+    "TotalEnergySaved": 10,
+    "AverageRT": 88.0, 
+    "Geolocation": "101.1212, 112.1133"
 }
 ```
 
