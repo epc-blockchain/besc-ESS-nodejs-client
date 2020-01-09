@@ -10,7 +10,7 @@ basePath: '/energysaving'
 
 # https will be used, http for dev purpose
 schemes:
-  - http
+  - https
   
 security:
   - ApiKeyAuth: []   
@@ -99,7 +99,49 @@ paths:
           $ref: '#/responses/UnauthorizedError'
         '409':
           description: invalid argument
-          
+
+  '/project/{project_id}/baseline':
+    get:
+      summary: Get project baseline
+      description: Returns the project baseline.
+      operationId: getProjectBaseline
+      parameters:
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        type: string
+      responses:
+        '200':
+          description: success
+        '400':
+          description: invalid content
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '409':
+          description: invalid argument
+  
+  '/project/{project_id}/formulas':
+    get:
+      summary: Get project formulas
+      description: Returns the project formulas.
+      operationId: getProjectFormulas
+      parameters:
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        type: string
+      responses:
+        '200':
+          description: success
+        '400':
+          description: invalid content
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '409':
+          description: invalid argument
+
   # will be removed from production
   '/debugs/{project_id}/last':
     get:
@@ -193,6 +235,7 @@ definitions:
       - DateTime
       - Devices
       - TotalEnergyUsage
+      - TotalEnergySaved
       - AverageRT
       - Geolocation
     properties:
@@ -207,6 +250,8 @@ definitions:
           $ref: '#/definitions/Devices'
       TotalEnergyUsage:
         type : number
+      TotalEnergySaved:
+        type : number
       AverageRT:
         type : number
       Geolocation:
@@ -216,11 +261,20 @@ definitions:
     required:
       - DeviceId
       - EnergyUsage
+      - EnergySaved
+      - Efficiency
+      - Formulas
     properties:
       DeviceId:
         type: string
       EnergyUsage:
         type: number
+      EnergySaved:
+        type: number
+      Efficiency:
+        type: number
+      Formulas:
+        type: array
           
   DataPushResponse:
     type: object

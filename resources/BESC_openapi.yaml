@@ -7,7 +7,7 @@ info:
 # https will be used, http for dev purpose
 # there will be a testing server
 servers:
-- url: http://carboapi.besc.online/energysaving
+- url: https://carboapi.besc.online/energysaving
 security:
 - ApiKeyAuth: []
 paths:
@@ -97,6 +97,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataPushResponse'
+        400:
+          description: invalid content
+          content: {}
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        409:
+          description: invalid argument
+          content: {}
+  /project/{project_id}/baseline:
+    get:
+      summary: Get project baseline
+      description: Returns the project baseline.
+      operationId: getProjectBaseline
+      parameters:
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: success
+          content: {}
+        400:
+          description: invalid content
+          content: {}
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        409:
+          description: invalid argument
+          content: {}
+  /project/{project_id}/formulas:
+    get:
+      summary: Get project formulas
+      description: Returns the project formulas.
+      operationId: getProjectFormulas
+      parameters:
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: success
+          content: {}
         400:
           description: invalid content
           content: {}
@@ -246,6 +304,7 @@ components:
       - Devices
       - Geolocation
       - TotalEnergyUsage
+      - TotalEnergySaved
       type: object
       properties:
         Project:
@@ -259,6 +318,8 @@ components:
             $ref: '#/components/schemas/Devices'
         TotalEnergyUsage:
           type: number
+        TotalEnergySaved:
+          type: number
         AverageRT:
           type: number
         Geolocation:
@@ -267,12 +328,21 @@ components:
       required:
       - DeviceId
       - EnergyUsage
+      - EnergySaved
+      - Efficiency
+      - Formulas
       type: object
       properties:
         DeviceId:
           type: string
         EnergyUsage:
           type: number
+        EnergySaved:
+          type: number
+        Efficiency:
+          type: number
+        Formulas:
+          type: array
   responses:
     UnauthorizedError:
       description: API key is missing or invalid
