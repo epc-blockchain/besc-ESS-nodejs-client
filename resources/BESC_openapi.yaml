@@ -7,7 +7,7 @@ info:
 # https will be used, http for dev purpose
 # there will be a testing server
 servers:
-- url: http://carboapi.besc.online/besc-data/energysaving
+- url: http://carboapi.besc.online/energysaving
 security:
 - ApiKeyAuth: []
 paths:

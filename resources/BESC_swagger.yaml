@@ -6,7 +6,7 @@ info:
     
 # sample host
 host: 'carboapi.besc.online'
-basePath: '/besc-data/energysaving'
+basePath: '/energysaving'
 
 # https will be used, http for dev purpose
 schemes:

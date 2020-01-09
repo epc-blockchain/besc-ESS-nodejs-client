@@ -5,7 +5,7 @@ class BESC_ESS_Host{
     }
 
     static createDefault(){
-        return new BESC_ESS_Host("http://carboapi.besc.online/besc-data");
+        return new BESC_ESS_Host("https://carboapi.besc.online");
     }
 
     setEndPoint(endpoint){
