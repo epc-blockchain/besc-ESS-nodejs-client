@@ -17,20 +17,20 @@ For those who are not using this client, need to add in few header for it. Data 
     "Project" : "",
     "DateTime" : "2019-05-23T06:00:00",
     "Devices": [ 
-    { 
-        "DeviceId": "AC11", 
-        "EnergyUsage": 50,
-        "EnergySaved": 5,
-        "Efficiency": 10,
-        "Formulas": []
-    },
-    {
-        "DeviceId": "AC22", 
-        "EnergyUsage": 50,
-        "EnergySaved": 5,
-        "Efficiency": 12,
-        "Formulas": []
-    }
+        { 
+            "DeviceId": "AC11", 
+            "EnergyUsage": 50,
+            "EnergySaved": 5,
+            "Efficiency": 10,
+            "Formulas": []
+        },
+        {
+            "DeviceId": "AC22", 
+            "EnergyUsage": 50,
+            "EnergySaved": 5,
+            "Efficiency": 12,
+            "Formulas": []
+        }
     ], 
     "TotalEnergyUsage": 100.0, 
     "TotalEnergySaved": 10,
@@ -58,20 +58,20 @@ var object = {
     Project : "",
     DateTime : "2019-05-23T06:00:00",
     Devices: [ 
-    { 
-	DeviceId: "AC11", 
-    EnergyUsage: 50.0 ,
-    EnergySaved: 5,
-    Efficiency: 10,
-    Formulas: []
-    },
-    {
-	DeviceId: "AC22", 
-    EnergyUsage: 50.0 ,
-    EnergySaved: 5,
-    Efficiency: 12,
-    Formulas: []
-    }
+        { 
+            DeviceId: "AC11", 
+            EnergyUsage: 50.0 ,
+            EnergySaved: 5,
+            Efficiency: 10,
+            Formulas: []
+        },
+        {
+            DeviceId: "AC22", 
+            EnergyUsage: 50.0 ,
+            EnergySaved: 5,
+            Efficiency: 12,
+            Formulas: []
+        }
     ], 
     TotalEnergyUsage: 100.0,
     TotalEnergySaved: 10, 
