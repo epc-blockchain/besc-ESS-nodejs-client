@@ -15,7 +15,7 @@
     "carbo"
   ],
   "author": "EPC-Blockhain",
-  "license": "LGPL",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/epc-blockchain/besc-ESS-nodejs-client/issues"
   },
