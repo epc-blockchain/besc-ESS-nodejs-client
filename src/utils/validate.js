@@ -33,3 +33,21 @@ module.exports.array = (variable, variable_name, required = true) => {
         }
     }
 }
+
+module.exports.instance = (variable, variable_name, instanceObj) => {
+    if(!(variable instanceof instanceObj)){
+        throw new Error("Invalid data. "+variable_name+ " must be instance of " + instanceObj.name);
+    }
+}
+
+module.exports.instanceArray = (variableArray, variable_name,  instanceObj) => {
+    if(!Array.isArray(variableArray)){
+        throw new Error("Invalid data. "+variable_name+ " must be "+ instanceObj.name +" instance array");
+    }
+
+    for (const iterator of variableArray) {
+        if(!(iterator instanceof instanceObj)){
+            throw new Error("Invalid data. "+variable_name+ " must be "+ instanceObj.name +" instance array");
+        }
+    }
+}

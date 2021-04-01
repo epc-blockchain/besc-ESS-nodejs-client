@@ -110,6 +110,51 @@ paths:
         409:
           description: invalid argument
           content: {}
+  /project/{project_id}/batch:
+    post:
+      summary: Receive project energy saving data in batch
+      description: Receive project energy saving data in batch
+      operationId: setProjectBatchRecord
+      parameters:
+      - name: checksum
+        in: header
+        description: Checksum of the project data batch
+        required: true
+        schema:
+          type: string
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Project data serialized array input
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRecords'
+        required: true
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataPushResponse'
+        400:
+          description: invalid content
+          content: {}
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        409:
+          description: invalid argument
+          content: {}
   /project/{project_id}/baseline:
     get:
       summary: Get project baseline

@@ -8,3 +8,4 @@ exports.Host = require('./services/besc_host').default;
 exports.Endpoints = require('./services/besc_host').endpoints;
 exports.keyPair = require('./model/keypair').default;
 exports.helper = require('./utils/helper');
+exports.checksum = require('./utils/checksum');

@@ -100,6 +100,41 @@ paths:
         '409':
           description: invalid argument
 
+  '/project/{project_id}/batch':
+    post:
+      summary: Receive project energy saving data in batch
+      description: Receive project energy saving data in batch
+      operationId: setProjectBatchRecord
+      parameters:
+      - name: checksum
+        in: header
+        description: Checksum of the project data batch
+        required: true
+        type: string
+      - name: project_id
+        in: path
+        description: Project id from the BESC project
+        required: true
+        type: string
+      - name: DataInput
+        in: body
+        description: Project data serialized array input
+        required: true
+        schema:
+          type: object
+          $ref: '#/definitions/ProjectRecords'
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/DataPushResponse'
+        '400':
+          description: invalid content
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '409':
+          description: invalid argument
+
   '/project/{project_id}/baseline':
     get:
       summary: Get project baseline

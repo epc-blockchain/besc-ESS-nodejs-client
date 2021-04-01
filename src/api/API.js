@@ -1,6 +1,7 @@
 var rp = require('request-promise-native');
 const qS = require('query-string');
 const besc_host = require("../services/besc_host");
+const checksumUtils = require("../utils/checksum");
 
 module.exports.getLastData = (client, keyPair ) =>{
 
@@ -70,6 +71,40 @@ module.exports.sendProjectData = (client, keyPair, projectData) =>{
             'checksum' : serializedData.checksum
         },
         body: serializedData.data,
+        json: true
+    };
+
+    return new Promise(function(resolve, reject){
+        rp(options)
+            .then(function(parsedBody){
+                resolve(parsedBody);
+            }).catch(function(err){
+                reject(err);
+            });
+    });
+}
+
+module.exports.sendBatchProjectData = (client, keyPair, batchProjectData) =>{
+
+    client.setProjectId(keyPair.projectId);
+    client.setEndPoint(besc_host.endpoints.projectBatch);
+
+    var projectBatchData = [];
+
+    for (const projectData of batchProjectData) {
+        var serializedData = projectData.serializeNGetChecksum();
+        projectBatchData.push(serializedData.data);
+    }
+
+    var options = {
+        method: "POST",
+        uri: client.buildUrl(),
+        headers:{
+            'apikey': keyPair.apiKey,
+            'Content-Type': 'application/json',
+            'checksum' : checksumUtils.getBatchChecksum(batchProjectData)
+        },
+        body: projectBatchData,
         json: true
     };
 

@@ -18,36 +18,16 @@ var host_client = new besc_client.Host("https://dev-api.besc.online");
 
 (async () =>{ 
 
-    // get formulas from the Data API
-    /*
-        var formulas = await helper.getAllFormulas(host_client, keypair);
-    
-        var f1 = formulas["volumetricWeight"].duplicate();
+    //var formulas = await helper.getAllFormulas(host_client, keypair);
 
-        
-        f1.applyFieldsValues({h: 10, w: 10, d: 10});
-
-        var f2 = formulas["volumetricWeight"].duplicate();
-
-        f2.applyFieldsValues({h: 20, w: 20, d: 20});
-
-    */
-
-    // or create yourself, if Data API allow
     var formulas = {
         sample : new Formula("sample", ["a","b", "c"], "a * b / c")
     };
 
-    // duplicate another formula instance
     var f1 = formulas["sample"].duplicate();
 
     // formula Name is not fixed
     f1.applyFieldsValues({a: 10, b: 10, c: 10});
-
-    var f2 = formulas["sample"].duplicate();
-    f2.applyFieldsValues({a: 20, b: 20, c: 20});
-    // you can create Project data  with current time with
-    // ProjectData.creatWithCurrentTime
 
     var projectData = new ProjectData(
         "2019-05-29T06:00:00", // UTC Timestamp
@@ -65,7 +45,30 @@ var host_client = new besc_client.Host("https://dev-api.besc.online");
                 100, // EnergyUsage
                 15, // EnergySaved
                 15, // Efficiency
-                [f2] //formulas
+                [] //formulas
+            ), 
+        ],
+        80.5, // AverageRT
+        "101.1212, 112.1133" // Geolocation
+    );
+
+    var projectData2 = new ProjectData(
+        "2019-05-29T06:31:00", // UTC Timestamp
+        "Testing", 
+        [
+            new Device(
+                "AABC1", // Id
+                50, // EnergyUsage
+                5, // EnergySaved
+                10, // Efficiency
+                [f1] //formulas
+            ), 
+            new Device(
+                "AABC2", // Id
+                100, // EnergyUsage
+                15, // EnergySaved
+                15, // Efficiency
+                [] //formulas
             ), 
         ],
         80.5, // AverageRT
@@ -73,7 +76,13 @@ var host_client = new besc_client.Host("https://dev-api.besc.online");
     );
 
     try{
-        var response = await besc_client.API.sendProjectData(host_client, keypair, projectData);
+
+        let batchProjectData = [
+            projectData,
+            projectData2
+        ];
+
+        var response = await besc_client.API.sendBatchProjectData(host_client, keypair, batchProjectData);
 
         console.log(response);
     }
