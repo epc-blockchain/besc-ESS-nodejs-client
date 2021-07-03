@@ -5,7 +5,7 @@ class BESC_ESS_Host{
     }
 
     static createDefault(){
-        return new BESC_ESS_Host("https://api.besc.online/energysaving");
+        return new BESC_ESS_Host("https://api.besc.online");
     }
 
     setEndPoint(endpoint){
