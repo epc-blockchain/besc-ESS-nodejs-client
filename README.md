@@ -105,7 +105,7 @@ Please use the code below to send in batch, the checksum will auto generate
     // ProjectData.creatWithCurrentTime
 
     var projectData = new ProjectData(
-        "2019-05-29T06:00:00", // UTC Timestamp
+        "2019-05-29T06:00:00", // local Timestamp
         "Testing", 
         [
             new Device(
@@ -128,7 +128,7 @@ Please use the code below to send in batch, the checksum will auto generate
     );
 
     var projectData2 = new ProjectData(
-        "2019-05-29T06:31:00", // UTC Timestamp
+        "2019-05-29T06:31:00", // local Timestamp
         "Testing", 
         [
             new Device(
