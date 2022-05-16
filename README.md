@@ -15,7 +15,7 @@ For those who are not using this client, need to add in few header for it. Data 
 ```js
 {
     "Project" : "",
-    "DateTime" : "2019-05-23T06:00:00",
+    "DateTime" : "2019-05-23T06:00:00", // UTC Timestamp
     "Devices": [ 
         { 
             "DeviceId": "AC11", 
@@ -56,7 +56,7 @@ As example for checksum,
 ```js
 var object = {
     Project : "",
-    DateTime : "2019-05-23T06:00:00",
+    DateTime : "2019-05-23T06:00:00", // UTC Timestamp
     Devices: [ 
         { 
             DeviceId: "AC11", 
@@ -105,7 +105,7 @@ Please use the code below to send in batch, the checksum will auto generate
     // ProjectData.creatWithCurrentTime
 
     var projectData = new ProjectData(
-        "2019-05-29T06:00:00", // local Timestamp
+        "2019-05-29T06:00:00", // UTC Timestamp
         "Testing", 
         [
             new Device(
@@ -128,7 +128,7 @@ Please use the code below to send in batch, the checksum will auto generate
     );
 
     var projectData2 = new ProjectData(
-        "2019-05-29T06:31:00", // local Timestamp
+        "2019-05-29T06:31:00", // UTC Timestamp
         "Testing", 
         [
             new Device(
@@ -155,3 +155,7 @@ let batchProjectData = [projectData, projectData2];
 var response = await besc_client.API.sendBatchProjectData(host_client, keypair, batchProjectData);
 
 ```
+
+## Timestamp of the data
+
+Please make sure the timestamp of the record is in UTC time (UTC+0)
